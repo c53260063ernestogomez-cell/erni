@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Storm Token | Proyecto Fan</title>
+  <meta name="description" content="Storm Token: concepto fan de una moneda para batallas, skins y recompensas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+  <style>
+:root {
+  --bg: #0b0620;
+  --bg2: #150b36;
+  --purple: #7c3aed;
+  --blue: #22d3ee;
+  --yellow: #facc15;
+  --text: #f4f1ff;
+  --muted: #a99fd1;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at 20% 0%, #2a1366 0%, var(--bg) 55%);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* NAVBAR */
+.navbar {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 6%;
+  background: rgba(11, 6, 32, .8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.logo {
+  font-family: 'Bangers', cursive;
+  font-size: 1.8rem; letter-spacing: 2px;
+  color: var(--text); text-decoration: none;
+}
+.logo span { color: var(--yellow); }
+nav { display: flex; align-items: center; gap: 24px; }
+nav a { color: var(--muted); text-decoration: none; font-weight: 600; transition: .2s; }
+nav a:hover { color: var(--blue); }
+
+/* BOTONES */
+.btn {
+  display: inline-block;
+  padding: 14px 30px;
+  border: none; cursor: pointer;
+  font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1rem;
+  color: #1b1200; text-decoration: none;
+  background: linear-gradient(135deg, var(--yellow), #f59e0b);
+  border-radius: 12px;
+  box-shadow: 0 6px 0 #b45309, 0 12px 24px rgba(250, 204, 21, .25);
+  transition: transform .15s, box-shadow .15s;
+}
+.btn:hover { transform: translateY(-3px); box-shadow: 0 9px 0 #b45309, 0 16px 28px rgba(250, 204, 21, .35); }
+.btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #b45309; }
+.btn-small { padding: 8px 18px; font-size: .9rem; color: #1b1200 !important; }
+.btn-outline {
+  background: transparent; color: var(--text);
+  border: 2px solid var(--blue);
+  box-shadow: 0 6px 0 rgba(34, 211, 238, .35);
+}
+.btn-outline:hover { box-shadow: 0 9px 0 rgba(34, 211, 238, .45); }
+
+/* HERO */
+.hero {
+  display: grid; grid-template-columns: 1.1fr .9fr;
+  align-items: center; gap: 40px;
+  min-height: 88vh; padding: 60px 6%;
+}
+.tag {
+  display: inline-block; padding: 6px 14px;
+  background: rgba(124, 58, 237, .25);
+  border: 1px solid var(--purple);
+  border-radius: 999px;
+  font-size: .8rem; font-weight: 700; letter-spacing: 1px;
+  color: var(--blue); margin-bottom: 18px;
+}
+.hero h1 {
+  font-family: 'Bangers', cursive;
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  line-height: 1; letter-spacing: 2px;
+  margin-bottom: 18px;
+}
+.glow {
+  color: var(--yellow);
+  text-shadow: 0 0 20px rgba(250, 204, 21, .7), 0 0 50px rgba(250, 204, 21, .4);
+}
+.lead { color: var(--muted); font-size: 1.1rem; max-width: 520px; margin-bottom: 30px; }
+.hero-buttons { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 40px; }
+
+.stats { display: flex; gap: 36px; flex-wrap: wrap; }
+.stats strong { display: block; font-family: 'Bangers', cursive; font-size: 2rem; color: var(--blue); letter-spacing: 1px; }
+.stats span { color: var(--muted); font-size: .85rem; }
+
+/* MONEDA 3D */
+.hero-coin { display: flex; flex-direction: column; align-items: center; }
+.coin {
+  width: 260px; height: 260px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 25%, #fff6b0, var(--yellow) 40%, #d97706 100%);
+  border: 12px solid #f59e0b;
+  box-shadow:
+    inset 0 0 0 8px rgba(255,255,255,.25),
+    inset 0 -14px 30px rgba(180, 83, 9, .6),
+    0 0 80px rgba(250, 204, 21, .45);
+  display: grid; place-items: center;
+  animation: spin 4s ease-in-out infinite, float 3s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+.coin-face { text-align: center; color: #78350f; }
+.bolt { display: block; font-size: 6.5rem; line-height: 1; filter: drop-shadow(0 4px 0 rgba(120, 53, 15, .4)); }
+.coin-face small { font-family: 'Bangers', cursive; font-size: 1.6rem; letter-spacing: 6px; }
+.shadow {
+  width: 180px; height: 24px; margin-top: 40px;
+  background: radial-gradient(ellipse, rgba(0,0,0,.6), transparent 70%);
+  animation: shadow 3s ease-in-out infinite;
+}
+
+@keyframes spin {
+  0%   { transform: rotateY(0deg); }
+  50%  { transform: rotateY(180deg); }
+  100% { transform: rotateY(360deg); }
+}
+@keyframes float {
+  0%, 100% { margin-top: 0; }
+  50%      { margin-top: -22px; }
+}
+@keyframes shadow {
+  0%, 100% { transform: scale(1); opacity: .8; }
+  50%      { transform: scale(.7); opacity: .4; }
+}
+
+/* SECCIONES */
+.section { padding: 90px 6%; text-align: center; }
+.section.dark { background: var(--bg2); }
+.section h2 {
+  font-family: 'Bangers', cursive;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  letter-spacing: 2px; margin-bottom: 14px;
+}
+.sub { color: var(--muted); margin-bottom: 40px; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 26px; margin-top: 40px;
+  max-width: 1100px; margin-inline: auto;
+}
+
+/* TARJETAS */
+.card {
+  padding: 34px 24px;
+  background: linear-gradient(160deg, rgba(124, 58, 237, .2), rgba(34, 211, 238, .06));
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 20px;
+  transition: transform .25s, border-color .25s;
+}
+.card:hover { transform: translateY(-8px); border-color: var(--blue); }
+.icon { font-size: 3rem; margin-bottom: 12px; }
+.card h3 { margin-bottom: 8px; }
+.card p { color: var(--muted); font-size: .95rem; }
+
+/* GALERÍA */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 26px; margin: 40px auto 0; max-width: 1100px;
+}
+.gallery figure {
+  position: relative; overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 14px 34px rgba(0,0,0,.45);
+}
+.gallery img {
+  display: block; width: 100%; height: 280px;
+  object-fit: cover;
+  transition: transform .5s;
+}
+.gallery figure:hover img { transform: scale(1.1); }
+.gallery figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 36px 16px 14px;
+  background: linear-gradient(transparent, rgba(11, 6, 32, .9));
+  font-family: 'Bangers', cursive; font-size: 1.5rem; letter-spacing: 2px;
+  text-align: left;
+}
+
+/* PAQUETES */
+.packs { align-items: stretch; }
+.pack {
+  position: relative;
+  padding: 36px 26px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 22px;
+  display: flex; flex-direction: column; align-items: center;
+  transition: transform .25s;
+}
+.pack:hover { transform: translateY(-8px); }
+.pack.featured {
+  background: linear-gradient(160deg, rgba(124, 58, 237, .45), rgba(250, 204, 21, .12));
+  border: 2px solid var(--yellow);
+  box-shadow: 0 0 40px rgba(250, 204, 21, .2);
+  transform: scale(1.04);
+}
+.pack.featured:hover { transform: scale(1.04) translateY(-8px); }
+.badge {
+  position: absolute; top: -14px;
+  padding: 5px 16px; border-radius: 999px;
+  background: var(--yellow); color: #1b1200;
+  font-size: .72rem; font-weight: 700; letter-spacing: 1px;
+}
+.pack h3 { font-family: 'Bangers', cursive; font-size: 1.8rem; letter-spacing: 2px; }
+.amount { font-size: 2rem; font-weight: 700; color: var(--yellow); margin: 10px 0 4px; }
+.price { color: var(--muted); font-size: 1.1rem; margin-bottom: 18px; }
+.pack ul { list-style: none; margin-bottom: 26px; color: var(--muted); }
+.pack li { padding: 5px 0; }
+.pack li::before { content: '✔ '; color: var(--blue); }
+.pack .btn { margin-top: auto; }
+
+/* FAQ */
+.faq { max-width: 750px; margin: 40px auto 0; text-align: left; }
+details {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 14px;
+  padding: 18px 22px; margin-bottom: 14px;
+  transition: border-color .2s;
+}
+details[open] { border-color: var(--purple); }
+summary { cursor: pointer; font-weight: 600; list-style: none; }
+summary::after { content: '+'; float: right; color: var(--blue); font-size: 1.4rem; line-height: 1; }
+details[open] summary::after { content: '–'; }
+details p { margin-top: 12px; color: var(--muted); }
+
+/* FOOTER */
+.footer {
+  text-align: center; padding: 40px 6%;
+  background: #070315;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.footer .small { color: var(--muted); font-size: .8rem; margin-top: 6px; }
+
+/* TOAST */
+.toast {
+  position: fixed; bottom: 30px; left: 50%;
+  transform: translate(-50%, 120px);
+  padding: 14px 26px;
+  background: var(--purple); color: #fff;
+  border-radius: 12px; font-weight: 600;
+  box-shadow: 0 10px 30px rgba(0,0,0,.5);
+  transition: transform .35s;
+  z-index: 100;
+}
+.toast.show { transform: translate(-50%, 0); }
+
+/* RESPONSIVE */
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; text-align: center; min-height: auto; }
+  .lead { margin-inline: auto; }
+  .hero-buttons, .stats { justify-content: center; }
+  nav a:not(.btn) { display: none; }
+  .coin { width: 200px; height: 200px; }
+  .bolt { font-size: 5rem; }
+  .pack.featured { transform: none; }
+  .pack.featured:hover { transform: translateY(-8px); }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <a href="#inicio" class="logo">⚡ STORM<span>TOKEN</span></a>
+    <nav>
+      <a href="#caracteristicas">Características</a>
+      <a href="#galeria">Galería</a>
+      <a href="#paquetes">Paquetes</a>
+      <a href="#faq">FAQ</a>
+      <a href="#paquetes" class="btn btn-small">Conseguir</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="inicio" class="hero">
+    <div class="hero-text">
+      <p class="tag">PROYECTO FAN · TEMPORADA 2026</p>
+      <h1>La moneda de la <span class="glow">tormenta</span></h1>
+      <p class="lead">Gana, canjea y presume. El Storm Token es la moneda ideal para desbloquear skins, emotes y recompensas exclusivas en tu próxima batalla.</p>
+      <div class="hero-buttons">
+        <a href="#paquetes" class="btn">Ver paquetes</a>
+        <a href="#caracteristicas" class="btn btn-outline">Saber más</a>
+      </div>
+      <div class="stats">
+        <div><strong id="contador1" data-target="250000">0</strong><span>Jugadores</span></div>
+        <div><strong id="contador2" data-target="1200">0</strong><span>Recompensas</span></div>
+        <div><strong id="contador3" data-target="98">0</strong><span>% Satisfechos</span></div>
+      </div>
+    </div>
+
+    <div class="hero-coin">
+      <div class="coin">
+        <div class="coin-face">
+          <span class="bolt">⚡</span>
+          <small>STORM</small>
+        </div>
+      </div>
+      <div class="shadow"></div>
+    </div>
+  </section>
+
+  <!-- CARACTERÍSTICAS -->
+  <section id="caracteristicas" class="section">
+    <h2>¿Qué puedes hacer con tus tokens?</h2>
+    <div class="grid">
+      <article class="card">
+        <div class="icon">🎭</div>
+        <h3>Skins épicas</h3>
+        <p>Canjea tokens por atuendos únicos y destaca en cada partida.</p>
+      </article>
+      <article class="card">
+        <div class="icon">💃</div>
+        <h3>Emotes y bailes</h3>
+        <p>Celebra tu victoria con los mejores movimientos del lobby.</p>
+      </article>
+      <article class="card">
+        <div class="icon">🎒</div>
+        <h3>Mochilas y picos</h3>
+        <p>Personaliza tu equipo con accesorios que nadie más tiene.</p>
+      </article>
+      <article class="card">
+        <div class="icon">🏆</div>
+        <h3>Pase de batalla</h3>
+        <p>Desbloquea niveles y recompensas extra cada temporada.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- GALERÍA -->
+  <section id="galeria" class="section">
+    <h2>Galería</h2>
+    <p class="sub">Para cambiar las fotos, reemplaza foto1, foto2 y foto3 por tus propias imágenes.</p>
+    <div class="gallery">
+      <figure>
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNTAwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMyYTEzNjYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwYjA2MjAiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8cmFkaWFsR3JhZGllbnQgaWQ9ImMiIGN4PSIuMyIgY3k9Ii4yNSIgcj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2ZmZjZiMCIvPjxzdG9wIG9mZnNldD0iLjQ1IiBzdG9wLWNvbG9yPSIjZmFjYzE1Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZDk3NzA2Ii8+CiAgICA8L3JhZGlhbEdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0idXJsKCNnKSIvPgogIDxnIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii42Ij4KICAgIDxjaXJjbGUgY3g9IjkwIiBjeT0iNzAiIHI9IjMiLz48Y2lyY2xlIGN4PSI3MDAiIGN5PSIxMTAiIHI9IjIiLz48Y2lyY2xlIGN4PSI2MjAiIGN5PSI2MCIgcj0iMyIvPgogICAgPGNpcmNsZSBjeD0iMTUwIiBjeT0iNDAwIiByPSIyIi8+PGNpcmNsZSBjeD0iNzMwIiBjeT0iNDIwIiByPSIzIi8+PGNpcmNsZSBjeD0iMzAwIiBjeT0iNTAiIHI9IjIiLz4KICA8L2c+CiAgPGNpcmNsZSBjeD0iNDAwIiBjeT0iMjUwIiByPSIxOTAiIGZpbGw9IiNmYWNjMTUiIG9wYWNpdHk9Ii4xMiIvPgogIDxjaXJjbGUgY3g9IjQwMCIgY3k9IjI1MCIgcj0iMTMwIiBmaWxsPSJ1cmwoI2MpIiBzdHJva2U9IiNmNTllMGIiIHN0cm9rZS13aWR0aD0iMTQiLz4KICA8Y2lyY2xlIGN4PSI0MDAiIGN5PSIyNTAiIHI9IjEwNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utb3BhY2l0eT0iLjMiIHN0cm9rZS13aWR0aD0iNiIvPgogIDxwYXRoIGQ9Ik00MjAgMTYwIEwzNjAgMjYyIEgzOTggTDM4MCAzNDAgTDQ0NiAyMzIgSDQwNiBaIiBmaWxsPSIjNzgzNTBmIi8+CiAgPHRleHQgeD0iNDAwIiB5PSI0NzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzQiIGxldHRlci1zcGFjaW5nPSI4IiBmaWxsPSIjZmFjYzE1Ij5TVE9STSBUT0tFTjwvdGV4dD4KPC9zdmc+Cg==" alt="Moneda Storm Token dorada con un rayo">
+        <figcaption>El token</figcaption>
+      </figure>
+      <figure>
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNTAwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0icyIgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMxZTBiNGQiLz48c3RvcCBvZmZzZXQ9Ii42IiBzdG9wLWNvbG9yPSIjNWIyMWI2Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMjJkM2VlIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0idXJsKCNzKSIvPgogIDxnIGZpbGw9IiMwYjA2MjAiIG9wYWNpdHk9Ii44NSI+CiAgICA8cGF0aCBkPSJNMCA1MDAgVjMzMCBMOTAgMjYwIEwxNzAgMzMwIEwyNjAgMjMwIEwzNjAgMzQwIEw0NTAgMjcwIEw1NjAgMzUwIEw2NjAgMjUwIEw4MDAgMzQwIFY1MDAgWiIvPgogIDwvZz4KICA8cGF0aCBkPSJNNTIwIDAgTDQ0MCAxNzAgSDUwMCBMNDIwIDMzMCBMNTYwIDEzMCBINDk1IEw1NjAgMCBaIiBmaWxsPSIjZmFjYzE1Ii8+CiAgPHBhdGggZD0iTTUyMCAwIEw0NDAgMTcwIEg1MDAgTDQyMCAzMzAgTDU2MCAxMzAgSDQ5NSBMNTYwIDAgWiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjMiIG9wYWNpdHk9Ii43Ii8+CiAgPGcgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjI1Ij4KICAgIDxlbGxpcHNlIGN4PSIxNjAiIGN5PSI5MCIgcng9IjkwIiByeT0iMjYiLz48ZWxsaXBzZSBjeD0iMjMwIiBjeT0iMTEwIiByeD0iNzAiIHJ5PSIyMiIvPgogICAgPGVsbGlwc2UgY3g9IjY0MCIgY3k9IjgwIiByeD0iMTAwIiByeT0iMjgiLz4KICA8L2c+CiAgPHRleHQgeD0iNDAwIiB5PSI0NzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzQiIGxldHRlci1zcGFjaW5nPSI4IiBmaWxsPSIjZmZmIj5MQSBUT1JNRU5UQTwvdGV4dD4KPC9zdmc+Cg==" alt="Rayo cayendo sobre montañas en la tormenta">
+        <figcaption>La tormenta</figcaption>
+      </figure>
+      <figure>
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNTAwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYiIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwYjA2MjAiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM0YzFkOTUiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9InQiIHgxPSIwIiB5MT0iMCIgeDI9IjAiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZmRlMDQ3Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZDk3NzA2Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0idXJsKCNiKSIvPgogIDxnIHN0cm9rZT0iIzIyZDNlZSIgc3Ryb2tlLW9wYWNpdHk9Ii4yNSIgc3Ryb2tlLXdpZHRoPSIyIj4KICAgIDxwYXRoIGQ9Ik00MDAgMjUwIEwwIDAgTTQwMCAyNTAgTDIwMCAwIE00MDAgMjUwIEw2MDAgMCBNNDAwIDI1MCBMODAwIDAgTTQwMCAyNTAgTDAgNTAwIE00MDAgMjUwIEw4MDAgNTAwIi8+CiAgPC9nPgogIDxwYXRoIGQ9Ik0zMTAgMTEwIEg0OTAgVjIyMCBRNDkwIDMwMCA0MDAgMzEwIFEzMTAgMzAwIDMxMCAyMjAgWiIgZmlsbD0idXJsKCN0KSIgc3Ryb2tlPSIjYjQ1MzA5IiBzdHJva2Utd2lkdGg9IjYiLz4KICA8cGF0aCBkPSJNMzEwIDEzNSBIMjYwIFEyNTAgMjE1IDMyMCAyNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Y1OWUwYiIgc3Ryb2tlLXdpZHRoPSIxNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTQ5MCAxMzUgSDU0MCBRNTUwIDIxNSA0ODAgMjQwIiBmaWxsPSJub25lIiBzdHJva2U9IiNmNTllMGIiIHN0cm9rZS13aWR0aD0iMTQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxyZWN0IHg9IjM4MCIgeT0iMzEwIiB3aWR0aD0iNDAiIGhlaWdodD0iNTAiIGZpbGw9IiNmNTllMGIiLz4KICA8cmVjdCB4PSIzMzAiIHk9IjM2MCIgd2lkdGg9IjE0MCIgaGVpZ2h0PSIzMCIgcng9IjgiIGZpbGw9IiNiNDUzMDkiLz4KICA8cGF0aCBkPSJNNDEwIDE0MCBMMzY4IDIxNSBIMzk4IEwzODUgMjcwIEw0MzUgMTk1IEg0MDUgWiIgZmlsbD0iIzc4MzUwZiIvPgogIDx0ZXh0IHg9IjQwMCIgeT0iNDYwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iSW1wYWN0LCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjM0IiBsZXR0ZXItc3BhY2luZz0iOCIgZmlsbD0iI2ZhY2MxNSI+VklDVE9SSUE8L3RleHQ+Cjwvc3ZnPgo=" alt="Trofeo dorado de victoria">
+        <figcaption>La victoria</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- PAQUETES -->
+  <section id="paquetes" class="section dark">
+    <h2>Elige tu paquete</h2>
+    <p class="sub">Concepto de demostración. Los precios son ficticios para el proyecto.</p>
+    <div class="grid packs">
+      <article class="pack">
+        <h3>Chispa</h3>
+        <div class="amount">⚡ 1,000</div>
+        <p class="price">$ 7.99</p>
+        <ul>
+          <li>1 skin básica</li>
+          <li>1 emote</li>
+        </ul>
+        <button class="btn btn-outline" data-pack="Chispa">Elegir</button>
+      </article>
+
+      <article class="pack featured">
+        <span class="badge">MÁS POPULAR</span>
+        <h3>Relámpago</h3>
+        <div class="amount">⚡ 2,800</div>
+        <p class="price">$ 19.99</p>
+        <ul>
+          <li>2 skins épicas</li>
+          <li>3 emotes</li>
+          <li>Bonus +200 tokens</li>
+        </ul>
+        <button class="btn" data-pack="Relámpago">Elegir</button>
+      </article>
+
+      <article class="pack">
+        <h3>Tormenta</h3>
+        <div class="amount">⚡ 5,000</div>
+        <p class="price">$ 31.99</p>
+        <ul>
+          <li>4 skins legendarias</li>
+          <li>Pase de batalla</li>
+          <li>Bonus +500 tokens</li>
+        </ul>
+        <button class="btn btn-outline" data-pack="Tormenta">Elegir</button>
+      </article>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section">
+    <h2>Preguntas frecuentes</h2>
+    <div class="faq">
+      <details>
+        <summary>¿Qué es el Storm Token?</summary>
+        <p>Es un concepto de moneda virtual creado para este proyecto fan. No es un producto oficial.</p>
+      </details>
+      <details>
+        <summary>¿Los tokens caducan?</summary>
+        <p>En este concepto, nunca caducan. Los guardas hasta que quieras gastarlos.</p>
+      </details>
+      <details>
+        <summary>¿Puedo regalar tokens a mis amigos?</summary>
+        <p>Sí, la idea es que puedas enviar tokens a tu escuadrón y compartir recompensas.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>⚡ Storm Token · Proyecto fan creado con HTML y CSS.</p>
+    <p class="small">No afiliado ni respaldado por Epic Games. Fortnite es marca de sus respectivos dueños.</p>
+  </footer>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast"></div>
+
+  <script>
+    // Contadores animados
+    document.querySelectorAll('[data-target]').forEach(el => {
+      const target = +el.dataset.target;
+      let n = 0;
+      const step = Math.ceil(target / 60);
+      const t = setInterval(() => {
+        n += step;
+        if (n >= target) { n = target; clearInterval(t); }
+        el.textContent = n.toLocaleString('es-MX');
+      }, 25);
+    });
+
+    // Botones de paquetes
+    const toast = document.getElementById('toast');
+    document.querySelectorAll('[data-pack]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        toast.textContent = '⚡ Elegiste el paquete ' + btn.dataset.pack + ' (demo)';
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+      });
+    });
+  </script>
+</body>
+</html>
